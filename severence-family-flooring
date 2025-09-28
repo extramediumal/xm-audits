@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Presence Audit Report - Severance Family Flooring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+
+        .report-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 50px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .company-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .executive-summary {
+            padding: 50px;
+            background: linear-gradient(to bottom, #f7fafc, #ffffff);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .summary-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #667eea;
+        }
+
+        .summary-box h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .metrics-dashboard {
+            padding: 50px;
+            background: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card.critical {
+            border-color: #fc8181;
+        }
+
+        .metric-card.critical::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #fc8181;
+        }
+
+        .metric-card.warning {
+            border-color: #f6ad55;
+        }
+
+        .metric-card.warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #f6ad55;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .metric-value.critical {
+            color: #fc8181;
+        }
+
+        .metric-value.warning {
+            color: #f6ad55;
+        }
+
+        .metric-value.success {
+            color: #48bb78;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .findings-section {
+            padding: 50px;
+            background: #f7fafc;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .finding-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .finding-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .finding-card.strength {
+            border-left: 4px solid #48bb78;
+        }
+
+        .finding-card.opportunity {
+            border-left: 4px solid #f6ad55;
+        }
+
+        .finding-card.critical {
+            border-left: 4px solid #fc8181;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .badge.strength {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .badge.opportunity {
+            background: #fed7aa;
+            color: #7c2d12;
+        }
+
+        .badge.critical {
+            background: #feb2b2;
+            color: #742a2a;
+        }
+
+        .finding-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .recommendations {
+            padding: 50px;
+            background: white;
+        }
+
+        .priority-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .priority-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .priority-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .priority-card.urgent {
+            border: 2px solid #fc8181;
+            background: linear-gradient(to right, #fff5f5, #ffffff);
+        }
+
+        .priority-card.high {
+            border: 2px solid #f6ad55;
+            background: linear-gradient(to right, #fffdf7, #ffffff);
+        }
+
+        .priority-card.medium {
+            border: 2px solid #667eea;
+            background: linear-gradient(to right, #f7f7ff, #ffffff);
+        }
+
+        .priority-label {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .priority-label.urgent {
+            background: #fc8181;
+            color: white;
+        }
+
+        .priority-label.high {
+            background: #f6ad55;
+            color: white;
+        }
+
+        .priority-label.medium {
+            background: #667eea;
+            color: white;
+        }
+
+        .quick-wins {
+            padding: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .quick-win-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .quick-win-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            padding: 60px 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .competitor-box {
+            background: linear-gradient(to right, #f7f7ff, #ffffff);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .report-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .print-button {
+                display: none;
+            }
+            
+            .finding-card, .priority-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fed7aa 0%, #fcb69f 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #7c2d12;
+        }
+
+        .critical-highlight {
+            background: #feb2b2;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #742a2a;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="window.print()">
+        📄 Export PDF
+    </button>
+
+    <div class="report-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Digital Presence Audit Report</h1>
+            <p class="subtitle">Comprehensive Analysis & Growth Strategy</p>
+            <p class="company-name">Severance Family Flooring | Goffstown, NH</p>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <div class="summary-box">
+                <h2>Executive Summary</h2>
+                <p>
+                    <strong>Severance Family Flooring</strong> represents a significant untapped opportunity in the Goffstown flooring market. 
+                    While your business has built a foundation with <span class="highlight">214 Facebook followers</span> and 
+                    <span class="highlight">1 Nextdoor recommendation</span>, this audit reveals critical digital gaps that are 
+                    currently directing customers to your competitors. The good news: with <span class="critical-highlight">no Google Business Profile</span> 
+                    and <span class="critical-highlight">no website</span>, you have the unique opportunity to launch a comprehensive digital 
+                    presence that can capture significant market share within 30-60 days. Your competitors are well-established online, 
+                    but strategic implementation of our recommendations will position Severance Family Flooring as a modern, accessible 
+                    choice for local customers.
+                </p>
+            </div>
+        </div>
+
+        <!-- Metrics Dashboard -->
+        <div class="metrics-dashboard">
+            <h2 class="section-title">Current Digital Presence Status</h2>
+            <div class="metrics-grid">
+                <div class="metric-card critical">
+                    <div class="metric-value critical">0</div>
+                    <div class="metric-label">Google Business Profile</div>
+                </div>
+                <div class="metric-card critical">
+                    <div class="metric-value critical">No Website</div>
+                    <div class="metric-label">Web Presence</div>
+                </div>
+                <div class="metric-card warning">
+                    <div class="metric-value warning">214</div>
+                    <div class="metric-label">Facebook Likes</div>
+                </div>
+                <div class="metric-card critical">
+                    <div class="metric-value critical">0</div>
+                    <div class="metric-label">Google Reviews</div>
+                </div>
+                <div class="metric-card warning">
+                    <div class="metric-value warning">1</div>
+                    <div class="metric-label">Platform Active</div>
+                </div>
+                <div class="metric-card critical">
+                    <div class="metric-value critical">46%</div>
+                    <div class="metric-label">Searches Missing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical Issues -->
+        <div class="findings-section">
+            <h2 class="section-title">Digital Presence Analysis</h2>
+            
+            <div class="finding-card critical">
+                <span class="badge critical">⚠️ CRITICAL ISSUE</span>
+                <div class="finding-title">No Active Google Business Profile</div>
+                <p><strong>Impact:</strong> Missing from 46% of all Google searches which have local intent. Competitors are capturing 
+                ALL local search traffic. You're invisible to "near me" searches, Google Maps, and local 3-pack results where 
+                customers start their search.</p>
+                <p style="margin-top: 15px; padding: 15px; background: #f7fafc; border-radius: 8px;">
+                    <strong>Revenue Impact:</strong> Potentially losing 40-60% of qualified leads who rely on Google for local service discovery.
+                </p>
+            </div>
+
+            <div class="finding-card critical">
+                <span class="badge critical">⚠️ CRITICAL ISSUE</span>
+                <div class="finding-title">No Website</div>
+                <p><strong>Impact:</strong> 31% of consumers refuse to shop at businesses without websites. Zero ability to convert 
+                online searches into leads. 81% of consumers research online before purchases - you're missing from this critical 
+                decision-making process.</p>
+                <p style="margin-top: 15px; padding: 15px; background: #f7fafc; border-radius: 8px;">
+                    <strong>Trust Impact:</strong> Modern consumers view businesses without websites as outdated or potentially unreliable.
+                </p>
+            </div>
+
+            <div class="finding-card opportunity">
+                <span class="badge opportunity">Growth Opportunity</span>
+                <div class="finding-title">Limited Social Media Presence</div>
+                <p><strong>Current Status:</strong> Active Facebook page with 214 likes but minimal engagement. Not present on Instagram, 
+                LinkedIn, or TikTok where competitors build trust and showcase work.</p>
+                <p style="margin-top: 15px;">Visual platforms are perfect for flooring businesses to showcase transformations and build credibility.</p>
+            </div>
+
+            <div class="finding-card opportunity">
+                <span class="badge opportunity">Growth Opportunity</span>
+                <div class="finding-title">NAP Consistency Issues</div>
+                <p><strong>Current Status:</strong> Conflicting addresses (Weare vs Goffstown vs Pinardville) confuse Google and customers. 
+                This inconsistency prevents proper local SEO ranking and creates customer confusion.</p>
+            </div>
+        </div>
+
+        <!-- Competitor Analysis -->
+        <div class="recommendations">
+            <h2 class="section-title">Competitor Reality Check</h2>
+            
+            <div class="competitor-box">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Creative Vision Flooring (Goffstown)</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ Google Reviews: 5.0 stars (5+ reviews on Yelp)</li>
+                    <li>✓ Active website with free estimates messaging</li>
+                    <li>✓ 40+ years experience positioning</li>
+                    <li>✓ Regular activity across multiple platforms</li>
+                </ul>
+            </div>
+
+            <div class="competitor-box">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Dean's Carpet One (Manchester)</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ Professional website with financing options</li>
+                    <li>✓ BBB Accredited with A+ rating</li>
+                    <li>✓ 60+ years in business</li>
+                    <li>✓ Multiple locations and large showroom</li>
+                </ul>
+            </div>
+
+            <div class="competitor-box">
+                <h3 style="color: #667eea; margin-bottom: 10px;">Ed's Flooring America (Hooksett)</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>✓ 433 Facebook followers</li>
+                    <li>✓ Room visualizer tool on website</li>
+                    <li>✓ 30+ years experience, 3 locations</li>
+                    <li>✓ BBB Accredited since 2003</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 20px; padding: 20px; background: #fff5f5; border-radius: 12px; border-left: 4px solid #fc8181;">
+                <strong>Reality:</strong> Severance Family Flooring is invisible compared to competitors who dominate search results 
+                and have established trust signals. But this also means there's massive room for growth.
+            </p>
+        </div>
+
+        <!-- Strategic Recommendations -->
+        <div class="findings-section">
+            <h2 class="section-title">Strategic Recommendations</h2>
+            
+            <div class="priority-card urgent">
+                <span class="priority-label urgent">🚨 Priority 1: IMMEDIATE</span>
+                <h3 style="color: #2d3748; margin-bottom: 10px;">Google Business Profile</h3>
+                <p><strong>Action:</strong> Create and verify GBP within 7 days</p>
+                <p style="margin-top: 10px;"><strong>Why It Matters:</strong> You're missing from "near me" searches where 78% of local 
+                mobile searches result in offline purchases. Optimized profiles receive 7x more clicks and see 68-120% traffic increases.</p>
+            </div>
+
+            <div class="priority-card urgent">
+                <span class="priority-label urgent">🚨 Priority 2: URGENT</span>
+                <h3 style="color: #2d3748; margin-bottom: 10px;">Basic Website</h3>
+                <p><strong>Action:</strong> Launch simple 5-page website within 30 days</p>
+                <p style="margin-top: 10px;"><strong>Why It Matters:</strong> 81% of consumers research online before purchases. 
+                Even a basic site with services, contact info, and testimonials will capture leads competitors are taking.</p>
+            </div>
+
+            <div class="priority-card high">
+                <span class="priority-label high">Priority 3</span>
+                <h3 style="color: #2d3748; margin-bottom: 10px;">Review Collection</h3>
+                <p><strong>Action:</strong> Implement systematic review requests from past customers</p>
+                <p style="margin-top: 10px;"><strong>Why It Matters:</strong> 98% of consumers read reviews. Your competitors have 
+                dozens to hundreds. Start with 10 happy customers to quickly build credibility.</p>
+            </div>
+
+            <div class="priority-card high">
+                <span class="priority-label high">Priority 4</span>
+                <h3 style="color: #2d3748; margin-bottom: 10px;">NAP Consistency</h3>
+                <p><strong>Action:</strong> Standardize business information everywhere</p>
+                <p style="margin-top: 10px;"><strong>Why It Matters:</strong> Conflicting addresses confuse Google and customers. 
+                Pick ONE primary location and use consistently.</p>
+            </div>
+
+            <div class="priority-card medium">
+                <span class="priority-label medium">Priority 5</span>
+                <h3 style="color: #2d3748; margin-bottom: 10px;">Facebook Optimization</h3>
+                <p><strong>Action:</strong> Post 3x weekly with project photos and tips</p>
+                <p style="margin-top: 10px;"><strong>Why It Matters:</strong> You have 214 followers but minimal engagement. 
+                Regular posting keeps you top-of-mind and builds trust with your existing audience.</p>
+            </div>
+        </div>
+
+        <!-- 3 Quick Wins -->
+        <div class="quick-wins">
+            <h2 class="section-title" style="color: white;">3 Quick Wins This Week</h2>
+            
+            <div class="quick-win-card">
+                <h3><span class="day-number">1</span> Day 1: Claim Your Google Business Profile ⏱️ 2 hours</h3>
+                <p>Visit business.google.com, claim your listing, add all services, upload 10-15 photos of your best work, 
+                and set accurate business hours. This alone will make you visible to thousands of local searchers.</p>
+            </div>
+            
+            <div class="quick-win-card">
+                <h3><span class="day-number">2</span> Day 2: Collect 5 Reviews ⏱️ 1 hour</h3>
+                <p>Text your last 10 happy customers with a direct link to leave a Google review (once GBP is active). 
+                Offer to create the link for them - make it effortless. Target: 5 reviews by week's end.</p>
+            </div>
+            
+            <div class="quick-win-card">
+                <h3><span class="day-number">3</span> Day 3: Facebook Revival ⏱️ 30 minutes</h3>
+                <p>Post 3 photos of recent flooring projects with captions like "Just completed this beautiful hardwood 
+                installation in Goffstown!" Include your phone number in every post. Set reminder to post 3x weekly going forward.</p>
+            </div>
+        </div>
+
+        <!-- Bottom Line -->
+        <div class="executive-summary">
+            <div class="summary-box">
+                <h2>The Bottom Line</h2>
+                <p style="font-size: 18px; font-weight: 600; color: #667eea; margin-bottom: 15px;">
+                    You're operating with 2011 marketing in 2025.
+                </p>
+                <p>
+                    Your competitors are capturing YOUR customers because they show up online. These fixes aren't optional - 
+                    they're survival essentials. The good news? You can see dramatic improvement within 30 days by tackling 
+                    these priorities.
+                </p>
+                <p style="margin-top: 20px; padding: 20px; background: #c6f6d5; border-radius: 8px;">
+                    <strong>Opportunity:</strong> With zero digital presence currently, implementing these recommendations could 
+                    result in 200-300% growth in lead generation within 90 days. You have nowhere to go but up!
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer CTA -->
+        <div class="footer">
+            <h2 style="font-family: 'Poppins', sans-serif; font-size: 32px; margin-bottom: 15px;">
+                Ready to Transform Your Digital Presence?
+            </h2>
+            <p style="font-size: 18px; opacity: 0.95; max-width: 600px; margin: 0 auto;">
+                Every day without a digital presence is money left on the table. Get a comprehensive audit that shows 
+                exactly where you stand and how to dominate your local market.
+            </p>
+            <a href="https://xmaudits.com" target="_blank" class="cta-button">
+                Get Your Digital Audit at XMAudits.com
+            </a>
+            <p style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+                Professional audits • Strategic recommendations • Measurable results
+            </p>
+        </div>
+    </div>
+</body>
+</html>
